@@ -1,0 +1,25 @@
+{
+  "source": [
+    {
+      "hostname" :"",
+      "port": 3306,
+      "database":["testflinkcdc"],
+      "tables": [
+        "customer",
+        "DATES",
+        "PART",
+        "SUPPLIER",
+        "more_primary"
+      ],
+      "username": "root",
+      "password": "YeEFRH6eUV8h3U5S",
+      "serverId": "540760",
+      "startup": "latest",
+      "timestamp": "2022-10-27 15:30:00"
+    }
+  ],
+  "sink": {
+    "topic": "",
+    "brokers": ""
+  }
+}

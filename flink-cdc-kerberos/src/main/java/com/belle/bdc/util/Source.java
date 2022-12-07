@@ -8,8 +8,7 @@ import lombok.Data;
  */
 @Data
 public class Source {
-    public static String HOST;
+    public static String HOSTNAME;
     public static String PORT;
     public static String[] DATABASES;
-    public static String[] TABLES;
 }

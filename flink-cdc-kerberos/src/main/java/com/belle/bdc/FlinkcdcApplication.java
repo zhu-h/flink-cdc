@@ -1,12 +1,15 @@
 package com.belle.bdc;
 
 
+import cn.hutool.core.io.resource.ResourceUtil;
+import com.belle.bdc.util.ConfRootBean;
 import com.belle.bdc.util.ProjectConfig;
-import com.ververica.cdc.connectors.mysql.source.MySqlSource;
-import com.ververica.cdc.debezium.JsonDebeziumDeserializationSchema;
-import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+
+
 import org.apache.flink.api.java.utils.ParameterTool;
-import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.JsonNode;
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;
+
 
 /**
  * @author : zhuhaohao
@@ -17,6 +20,9 @@ public class FlinkcdcApplication {
         //TODO 从外部读取配置文件，进行多库多表同步
         ParameterTool param = ParameterTool.fromArgs(args);
         String configPath = param.get("config_path");
+        String confStr = ResourceUtil.readUtf8Str(configPath);
+        ObjectMapper map = new ObjectMapper();
+        ConfRootBean confRootBean = map.readValue(confStr, ConfRootBean.class);
         //保证覆盖写的时候，可以以命令行的为最高优先级
         ParameterTool finalParam = ParameterTool.fromPropertiesFile(configPath).mergeWith(param);
         // 将配置文件配置 设置为静态变量的方式 方便配置调用
@@ -27,5 +33,10 @@ public class FlinkcdcApplication {
 
     public void run(ParameterTool param){
 
+    }
+
+    public static ConfRootBean setPara(ParameterTool param, ConfRootBean jParam){
+
+        return jParam;
     }
 }

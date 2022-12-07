@@ -13,6 +13,8 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 public class FlinkcdcApplication {
     public static void main(String[] args) throws Exception {
 
+        //TODO 从外部读取配置文件，进行多库多表同步
+
         MySqlSource<String> mySqlSource = MySqlSource.<String>builder()
                 .hostname("localhost")
                 .port(3306)
